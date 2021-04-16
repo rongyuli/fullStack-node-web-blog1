@@ -17,8 +17,9 @@ const Blog = sequelize.define('Blog', {
   heading: Sequelize.STRING,
   content: Sequelize.STRING,
 });
-const SlideShow = sequelize.define('SlideShow', {});
-
+const SlideShow = sequelize.define('SlideShow', {
+  img: Sequelize.STRING,
+});
 sequelize.sync();
 
-module.exports = { Blog };
+module.exports = { Blog, SlideShow };
