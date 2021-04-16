@@ -32,7 +32,7 @@ export default {
       this.blogs = res.data.reverse();
     },
   },
-  created() {
+  mounted() {
     this.getBlog();
   },
 };
