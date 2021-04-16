@@ -1,25 +1,18 @@
 const fs = require('fs');
-const path = require('path');
 const { SlideShow } = require('../model/global');
 const SlideShowMethods = require('../model/slideShow');
 Object.assign(SlideShow, SlideShowMethods);
 
 module.exports = {
   async add(ctx) {
-    const file = ctx.request.files.img;
-
-    console.log(111, file);
-
-    // const reader = fs.createReadStream(file.path);
-    // let filePath = path.join(__dirname, '/static/img/') + `${file.name}`;
-    // console.log(filePath);
-    // // 创建可写流
-    // const upStream = fs.createWriteStream(filePath);
-    // // 可读流通过管道写入可写流
-    // reader.pipe(upStream);
-    // return (ctx.body = '上传成功！');
-
-    await SlideShow.insert(ctx.request.files[0]);
+    const srcFile = ctx.request.files.img;
+    const randomName = new Date().getTime() + '.' + srcFile.name.split('.')[1];
+    const tgtPath = `static/img/${randomName}`;
+    const tgtContent = fs.readFileSync(srcFile.path);
+    fs.writeFileSync(tgtPath, tgtContent);
+    fs.unlinkSync(srcFile.path);
+    const res = await SlideShow.insert(`/img/${randomName}`);
+    ctx.body = res;
   },
   async delete(ctx) {
     let res = await SlideShow.delete(ctx.params.id);

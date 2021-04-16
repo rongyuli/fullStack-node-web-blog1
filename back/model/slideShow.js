@@ -1,8 +1,9 @@
 module.exports = {
-  async insert(img) {
+  async insert(path) {
     await this.create({
-      img: img,
+      img: path,
     });
+    return true;
   },
   async delete(id) {
     let res = await this.destroy({
@@ -26,7 +27,7 @@ module.exports = {
     return res[0];
   },
   async selectAll() {
-    const slideShow = await this.findAll();
+    const slideShow = await this.findAll({ attributes: ['id', 'img'] });
     return slideShow;
   },
 };

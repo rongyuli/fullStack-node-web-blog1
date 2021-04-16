@@ -17,7 +17,6 @@ app.use(
   })
 );
 app.use(bodyParser());
-
 app.use(router.routes());
 
 app.listen(3000, () => {
