@@ -1,6 +1,6 @@
 <template>
   <div>
-    <SlideShow></SlideShow>
+    <MyCarousel></MyCarousel>
     <ul v-for="item in blogs" :key="item.id">
       <li>
         <div class="heading" style="display: flex">
@@ -16,10 +16,10 @@
 </template>
 
 <script>
-import SlideShow from './slideShow';
+import MyCarousel from './home/carousel';
 export default {
   components: {
-    SlideShow,
+    MyCarousel,
   },
   data() {
     return {
@@ -38,12 +38,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.heading {
-  display: flex;
-  align-items: center;
-  & > * {
-    margin-right: 30px;
-  }
-}
-</style>
+<style lang="scss" scoped></style>

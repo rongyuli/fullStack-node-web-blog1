@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize');
+const { DataTypes } = require('sequelize');
 const sequelize = new Sequelize('koa', 'root', '123456', {
   host: 'localhost',
   dialect: 'mysql',
@@ -17,9 +18,19 @@ const Blog = sequelize.define('Blog', {
   heading: Sequelize.STRING,
   content: Sequelize.STRING,
 });
-const SlideShow = sequelize.define('SlideShow', {
-  img: Sequelize.STRING,
-});
+const carousel = sequelize.define(
+  'carousel',
+  {
+    img: Sequelize.STRING,
+    cover: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+  },
+  {
+    tableName: 'carousel',
+  }
+);
 sequelize.sync();
 
-module.exports = { Blog, SlideShow };
+module.exports = { Blog, carousel };

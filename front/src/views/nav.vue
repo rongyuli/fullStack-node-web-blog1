@@ -23,7 +23,7 @@ ul {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgb(255, 100, 131);
+  background: #dd290f;
   height: 40px;
   & > li {
     margin: 0 10px;
@@ -31,7 +31,7 @@ ul {
     cursor: pointer;
     font-size: 20px;
     &:hover {
-      color: yellow;
+      color: #ffdf00;
     }
   }
 }

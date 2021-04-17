@@ -21,4 +21,15 @@ ul,
 li {
   list-style: none;
 }
+.file {
+  display: none;
+}
+#app {
+  margin-bottom: 50px;
+}
+h1 {
+  text-align: center;
+  margin-bottom: 20px !important;
+  color: black;
+}
 </style>
