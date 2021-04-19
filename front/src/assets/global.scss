@@ -19,8 +19,9 @@ p {
 #app {
   margin-bottom: 50px;
 }
+.hide,
 .file {
-  display: none;
+  display: none !important;
 }
 [h1] {
   text-align: center;
