@@ -1,16 +1,17 @@
 <template>
   <Row>
-    <Col :xs="0" :sm="1" :md="3" :lg="5" :xl="6"></Col>
-    <Col :xs="24" :sm="22" :md="18" :lg="14" :xl="12">
+    <Col :xs="1" :sm="1" :md="2" :lg="3" :xl="4"></Col>
+    <Col :xs="22" :sm="22" :md="20" :lg="18" :xl="16">
       <section>
         <input id="post" class="file" type="file" @change="post" />
         <input id="put" class="file" type="file" @change="put" />
-        <h1>编辑轮播图</h1>
+        <h1 h1>添加轮播图</h1>
         <div style="display: flex">
           <Button @click="toPost" style="margin: 0 auto" type="success">添加</Button>
         </div>
         <Divider />
-        <Row type="flex" justify="space-around" align="middle">
+        <h1 h1>编辑轮播图</h1>
+        <Row type="flex" justify="start" align="middle">
           <Col
             v-for="(item, index) in carousel"
             class="carousel"
@@ -18,19 +19,20 @@
             :sm="24"
             :md="12"
             :lg="12"
-            :xl="12"
+            :xl="8"
             :key="index"
           >
             <Row type="flex" justify="space-around" align="middle">
               <Col push="1" class="num">{{ index + 1 }}</Col>
               <Col>
                 <div
+                  @click="toPut(item.id)"
                   :style="{ backgroundImage: `url(http://127.0.0.1:91${item.img})` }"
                   class="img"
                 ></div>
               </Col>
               <Col pull="1" class="buttons">
-                <Button @click="toPut(item.id)" type="info">选择</Button>
+                <Button @click="toPut(item.id)" type="info">修改</Button>
                 <Button @click="del(item.id)" type="error" style="background: #dd290f">
                   删除
                 </Button>
@@ -49,12 +51,12 @@
                 </i-Switch>
               </Col>
             </Row>
-            <Divider />
+            <Divider :class="{ invisible: carousel.length === index + 1 }" dashed />
           </Col>
         </Row>
       </section>
     </Col>
-    <Col :xs="0" :sm="1" :md="3" :lg="5" :xl="6"></Col>
+    <Col :xs="1" :sm="1" :md="2" :lg="3" :xl="4"></Col>
   </Row>
 </template>
 
@@ -127,8 +129,15 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: start;
+  align-items: center;
   & > * {
     margin: 5px 0;
   }
+}
+.ivu-divider {
+  margin: 15px 0;
+}
+.invisible {
+  display: none;
 }
 </style>

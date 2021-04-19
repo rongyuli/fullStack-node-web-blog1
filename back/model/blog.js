@@ -1,7 +1,10 @@
+const { select } = require('../controler/blog');
+
 module.exports = {
-  async insert(heading, content) {
+  async post(heading, author, content) {
     await this.create({
       heading: heading,
+      author: author,
       content: content,
     });
   },
@@ -13,7 +16,7 @@ module.exports = {
     });
     return res;
   },
-  async updateBlog(id, heading, content) {
+  async put(id, heading, content) {
     let res = await this.update(
       {
         heading: heading,
@@ -26,6 +29,14 @@ module.exports = {
       }
     );
     return res[0];
+  },
+  async select(id) {
+    const blog = await this.findAll({
+      where: {
+        id: id,
+      },
+    });
+    return blog;
   },
   async selectAll() {
     const blogs = await this.findAll();

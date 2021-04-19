@@ -22,7 +22,6 @@ module.exports = {
   async putCover(ctx) {
     const id = ctx.params.id;
     const cover = ctx.params.cover;
-    console.log(id, cover);
     const res = await carousel.putCover(id, cover);
     ctx.body = res;
   },

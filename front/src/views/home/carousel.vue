@@ -36,7 +36,7 @@ export default {
 
 <style lang="scss" scoped>
 .img {
-  background-position-x: center;
+  background-position: center;
   height: 500px;
 }
 @media screen and (max-width: 768px) {

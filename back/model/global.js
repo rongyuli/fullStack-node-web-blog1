@@ -15,13 +15,17 @@ sequelize
 
 // 创建modal
 const Blog = sequelize.define('Blog', {
-  heading: Sequelize.STRING,
-  content: Sequelize.STRING,
+  heading: 'VARCHAR(300)',
+  content: 'LONGTEXT',
+  author: {
+    type: 'VARCHAR(100)',
+    defaultValue: '布尔什维克',
+  },
 });
 const carousel = sequelize.define(
   'carousel',
   {
-    img: Sequelize.STRING,
+    img: DataTypes.STRING,
     cover: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,

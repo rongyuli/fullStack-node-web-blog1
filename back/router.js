@@ -5,10 +5,11 @@ const blog = require('./controler/blog');
 const carousel = require('./controler/caroucel.js');
 
 module.exports = router
-  .post('/blog', blog.add)
+  .post('/blog', blog.post)
   .delete('/blog/:id', blog.delete)
-  .put('/blog/:id/:h/:c', blog.update)
+  .put('/blog/:id', blog.put)
   .get('/blog', blog.selectAll)
+  .get('/blog/:id', blog.select)
 
   .post('/carousel', carousel.add)
   .delete('/carousel/:id', carousel.delete)

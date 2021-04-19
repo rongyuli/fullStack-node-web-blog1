@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <Nav></Nav>
+    <BackTop></BackTop>
     <router-view></router-view>
   </div>
 </template>
@@ -12,24 +13,5 @@ export default {
   },
 };
 </script>
-<style lang="scss">
-* {
-  padding: 0px;
-  margin: 0px;
-}
-ul,
-li {
-  list-style: none;
-}
-.file {
-  display: none;
-}
-#app {
-  margin-bottom: 50px;
-}
-h1 {
-  text-align: center;
-  margin-bottom: 20px !important;
-  color: black;
-}
-</style>
+<style src="./assets/global.scss" lang="scss"></style>
+<style src="./assets/icon/iconfont.css"></style>
