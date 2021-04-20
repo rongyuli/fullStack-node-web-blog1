@@ -5,7 +5,9 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    showEditBlog: false,
     edit: false,
+    editMode: false,
     nav: 1,
     blogId: '',
   },
@@ -20,6 +22,12 @@ export default new Vuex.Store({
     },
     toggleEdit(state, bool) {
       state.edit = bool;
+    },
+    toggleEditBlog(state, bool) {
+      state.showEditBlog = bool;
+    },
+    toggleEditMode(state, bool) {
+      state.editMode = bool;
     },
   },
   actions: {},

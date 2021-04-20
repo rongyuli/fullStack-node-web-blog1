@@ -18,6 +18,7 @@ router.afterEach((to) => {
   switch (to.path) {
     case '/':
     case '/back':
+    case '/edit':
       break;
     default:
       location.hash = '#/';
