@@ -1,20 +1,16 @@
 <template>
-  <row>
-    <Col :xs="1" :sm="1" :md="2" :lg="3" :xl="4"></Col>
-    <Col :xs="22" :sm="22" :md="20" :lg="18" :xl="16">
-      <h1 h1>编辑博文</h1>
-      <section>
-        <Input prefix="ios-book" v-model="editHeading" placeholder="标题" style="width: 300px" />
-      </section>
-      <section>
-        <QuillEditor ref="editQuill" v-model="editContent" :options="options"></QuillEditor>
-      </section>
-      <section>
-        <Button @click="put" type="info">确认</Button>
-      </section>
-    </Col>
-    <Col :xs="1" :sm="22" :md="2" :lg="3" :xl="4"></Col>
-  </row>
+  <div>
+    <h1 h1>编辑博文</h1>
+    <section>
+      <Input prefix="ios-book" v-model="editHeading" placeholder="标题" style="width: 300px" />
+    </section>
+    <section>
+      <QuillEditor ref="editQuill" v-model="editContent" :options="options"></QuillEditor>
+    </section>
+    <section>
+      <Button @click="put" type="info">确认</Button>
+    </section>
+  </div>
 </template>
 
 <script>
@@ -33,7 +29,6 @@ export default {
           toolbar: [
             ['bold', 'italic', 'underline', 'strike'], // 切换按钮
             [{ align: [] }], // 对齐方式
-            ['blockquote'], // 文本块/代码块
             [{ header: 1 }, { header: 2 }], // 用户自定义按钮值
             ['image'],
           ],
@@ -83,7 +78,7 @@ export default {
       return this.$refs.editQuill.quill;
     },
     id() {
-      return this.$store.state.blogId;
+      return this.$store.state.editBlogId;
     },
   },
   created() {

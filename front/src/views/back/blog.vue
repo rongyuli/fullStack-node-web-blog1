@@ -103,7 +103,7 @@ export default {
       return this.$refs.editQuill.quill;
     },
     id() {
-      return this.$store.state.blogId;
+      return this.$store.state.editBlogId;
     },
     edit() {
       return this.$store.state.edit;

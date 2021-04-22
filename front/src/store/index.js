@@ -8,15 +8,11 @@ export default new Vuex.Store({
     showEditBlog: false,
     edit: false,
     editMode: false,
-    nav: 1,
-    blogId: '',
+    editBlogId: '',
   },
   mutations: {
-    route(state, nav) {
-      state.nav = nav;
-    },
-    getBlogId(state, id) {
-      state.blogId = id;
+    setEditBlogId(state, id) {
+      state.editBlogId = id;
       state.nav = 2;
       state.edit = true;
     },

@@ -15,15 +15,15 @@ import 'quill/dist/quill.snow.css';
 import 'quill/dist/quill.bubble.css';
 
 router.afterEach((to) => {
-  switch (to.path) {
-    case '/':
-    case '/back':
-    case '/edit':
+  const path = to.path.split('/')[1];
+  switch (path) {
+    case 'home':
+    case 'back':
+    case 'edit':
+    case 'archive':
       break;
     default:
-      location.hash = '#/';
-      console.log(11);
-      store.commit('route', 1);
+      location.hash = '#/home';
   }
 });
 

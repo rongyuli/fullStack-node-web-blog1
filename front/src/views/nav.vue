@@ -11,8 +11,12 @@
           <span>管理</span>
         </MenuItem>
         <MenuItem :name="3">
+          <i class="iconfont iconxingxing"></i>
+          <span>内容</span>
+        </MenuItem>
+        <MenuItem :name="4">
           <i class="iconfont icondangwugongkai"></i>
-          <span>编辑</span>
+          <span>归档</span>
         </MenuItem>
       </Menu>
     </li>
@@ -24,7 +28,7 @@
         </div>
         <Icon @click="toggle" id="button" class="yellow" type="md-menu" />
       </div>
-      <div id="smallNavBox" :style="{ height: openNav ? '136px' : '0px' }">
+      <div id="smallNavBox" :style="{ height: openNav ? '175px' : '0px' }">
         <Menu mode="vertical" theme="light" :active-name="nav" @on-select="route">
           <MenuItem :name="1">
             <i class="iconfont iconxingxing"></i>
@@ -32,11 +36,15 @@
           </MenuItem>
           <MenuItem :name="2">
             <i class="iconfont icondangwugongkai"></i>
-            <span>网站管理</span>
+            <span>管理</span>
           </MenuItem>
           <MenuItem :name="3">
+            <i class="iconfont iconxingxing"></i>
+            <span>内容</span>
+          </MenuItem>
+          <MenuItem :name="4">
             <i class="iconfont icondangwugongkai"></i>
-            <span>内容管理</span>
+            <span>归档</span>
           </MenuItem>
         </Menu>
       </div>
@@ -50,6 +58,7 @@ export default {
     return {
       openNav: false,
       width: 0,
+      nav: 1,
       nowTitle: '',
       nowIcon: '',
     };
@@ -58,79 +67,92 @@ export default {
     route(name) {
       switch (name) {
         case 1:
-          if (location.hash === '#/') return (this.openNav = false);
-          this.toHome();
+          if (location.hash === '#/home') return (this.openNav = false);
+          this.$router.push('/home');
           break;
         case 2:
           if (location.hash === '#/back') return (this.openNav = false);
-          this.toBack();
+          this.$router.push('/back');
           break;
         case 3:
           if (location.hash === '#/edit') return (this.openNav = false);
-          this.toEdit();
+          this.$router.push('/edit');
+          break;
+        case 4:
+          if (location.hash === '#/archive') return (this.openNav = false);
+          this.$router.push('/archive');
           break;
       }
     },
     toHome() {
-      this.$router.push('/');
-      this.$store.commit('route', 1);
       this.openNav = false;
       this.nowTitle = '首页';
       this.nowIcon = 'iconxingxing';
     },
     toBack() {
-      this.$router.push('/back');
-      this.$store.commit('route', 2);
       this.openNav = false;
-      this.nowTitle = '网站管理';
+      this.nowTitle = '管理';
       this.nowIcon = 'icondangwugongkai';
     },
     toEdit() {
-      this.$router.push('/edit');
-      this.$store.commit('route', 3);
       this.openNav = false;
-      this.nowTitle = '内容管理';
+      this.nowTitle = '内容';
+      this.nowIcon = 'iconxingxing';
+    },
+    toArchive() {
+      this.openNav = false;
+      this.nowTitle = '归档';
       this.nowIcon = 'icondangwugongkai';
     },
     toggle() {
       this.openNav = !this.openNav;
     },
   },
-  computed: {
-    nav() {
-      return this.$store.state.nav;
-    },
-  },
   watch: {
-    $route(val) {
-      switch (val.path) {
-        case '/':
-          this.$store.commit('route', 1);
+    $route(route) {
+      const hash = route.path.split('/')[1];
+      switch (hash) {
+        case 'home':
           this.$store.commit('toggleEdit', false);
+          this.toHome();
+          this.nav = 1;
           break;
-        case '/back':
-          this.$store.commit('route', 2);
+        case 'back':
+          this.toBack();
+          this.nav = 2;
           break;
-        case '/edit':
-          this.$store.commit('route', 3);
+        case 'edit':
+          this.toEdit();
+          this.nav = 3;
+          break;
+        case 'archive':
+          this.toArchive();
+          this.nav = 4;
+          break;
       }
     },
   },
   created() {
-    switch (location.hash) {
-      case '#/':
-        this.$store.commit('route', 1);
+    const hash = location.hash.split('/')[1];
+    switch (hash) {
+      case 'home':
+        this.nav = 1;
         this.nowTitle = '首页';
         this.nowIcon = 'iconxingxing';
         break;
-      case '#/back':
-        this.$store.commit('route', 2);
-        this.nowTitle = '网站管理';
+      case 'back':
+        this.nav = 2;
+        this.nowTitle = '管理';
         this.nowIcon = 'icondangwugongkai';
         break;
-      case '#/edit':
-        this.$store.commit('route', 3);
-        this.nowTitle = '内容管理';
+      case 'edit':
+        this.nav = 3;
+        this.nowTitle = '内容';
+        this.nowIcon = 'iconxingxing';
+        break;
+      case 'archive':
+        this.nav = 4;
+        this.nowTitle = '归档';
         this.nowIcon = 'icondangwugongkai';
         break;
     }

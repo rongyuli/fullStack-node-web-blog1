@@ -1,23 +1,19 @@
 <template>
-  <row v-if="!edit">
-    <Col :xs="1" :sm="1" :md="2" :lg="3" :xl="4"></Col>
-    <Col :xs="22" :sm="22" :md="20" :lg="18" :xl="16">
-      <h1 h1>添加博文</h1>
-      <section>
-        <Input prefix="ios-book" v-model="heading" placeholder="标题" style="width: 300px" />
-      </section>
-      <section>
-        <Input prefix="ios-contact" v-model="author" placeholder="作者" style="width: 300px" />
-      </section>
-      <section>
-        <QuillEditor ref="editor" v-model="content" :options="options"></QuillEditor>
-      </section>
-      <section>
-        <Button @click="post" type="success">提交</Button>
-      </section>
-    </Col>
-    <Col :xs="1" :sm="22" :md="2" :lg="3" :xl="4"></Col>
-  </row>
+  <div>
+    <h1 h1>添加博文</h1>
+    <section>
+      <Input prefix="ios-book" v-model="heading" placeholder="标题" style="width: 300px" />
+    </section>
+    <section>
+      <Input prefix="ios-contact" v-model="author" placeholder="作者" style="width: 300px" />
+    </section>
+    <section>
+      <QuillEditor ref="editor" v-model="content" :options="options"></QuillEditor>
+    </section>
+    <section>
+      <Button @click="post" type="success">提交</Button>
+    </section>
+  </div>
 </template>
 
 <script>
@@ -37,7 +33,6 @@ export default {
           toolbar: [
             ['bold', 'italic', 'underline', 'strike'], // 切换按钮
             [{ align: [] }], // 对齐方式
-            ['blockquote'], // 文本块/代码块
             [{ header: 1 }, { header: 2 }], // 用户自定义按钮值
             ['image'],
           ],

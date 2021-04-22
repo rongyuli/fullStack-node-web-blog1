@@ -4,11 +4,24 @@
     <Col :xs="22" :sm="22" :md="20" :lg="18" :xl="16">
       <List item-layout="vertical">
         <ListItem v-for="item in data" :key="item.id">
-          <ListItemMeta
-            :avatar="item.avatar"
-            :description="getDesc(item.author, item.updatedAt)"
-            :title="item.heading"
-          />
+          <ListItemMeta :avatar="item.avatar">
+            <template #title>
+              <div>
+                <span style="cursor: pointer;" @click="toViewBlog(item.id)">
+                  {{ item.heading }}
+                </span>
+              </div>
+            </template>
+            <template #description>
+              <div>
+                <strong style="color: #df280f; margin-right:10px">{{ item.author }}</strong>
+                <span>{{ item.updatedAt === item.createdAt ? '发布于' : '编辑于' }}</span>
+                <span>
+                  {{ item.updatedAt === item.createdAt ? getBlogTime(item.createdAt) : getBlogTime(item.updatedAt) }}
+                </span>
+              </div>
+            </template>
+          </ListItemMeta>
           <template v-if="editMode" #action>
             <li @click="toEdit(item.id)" class="blue">
               <Icon type="ios-paper" />
@@ -19,7 +32,10 @@
               <span @click="del(item.id)">删除</span>
             </li>
           </template>
-          <div v-html="item.content"></div>
+          <template #extra>
+            <div style="cursor: pointer;" @click="toViewBlog(item.id)" v-html="item.firstImg"></div>
+          </template>
+          <div v-html="item.preview"></div>
         </ListItem>
       </List>
     </Col>
@@ -35,22 +51,36 @@ export default {
     };
   },
   methods: {
-    getDesc(author, time) {
-      const myTime = new Date(time).toLocaleString();
-      return `${author} ${myTime}`;
-    },
     async getBlog() {
       this.$Spin.show();
       const res = await this.$axios.get('/blog');
       this.$Spin.hide();
       this.data = res.data.reverse();
+      const getFilstImg = /<img.*?>/;
+      const delImg = /<img.*?>/g;
+      const devide = /(<h1>|<h2>|<p>)[^<]*(<\/h1>|<\/h2>|<\/p>)/g;
+      this.data.forEach((item, i, arr) => {
+        const first = item.content.match(getFilstImg);
+        arr[i].firstImg = first ? first[0] : null;
+        let preview = item.content.replace(delImg, '');
+        preview = preview.match(devide);
+        const html1 = preview[0] || '';
+        const html2 = preview[1] || '';
+        const html3 = '<p>. . .</p>';
+        if (preview[2]) preview = html1 + html2 + html3;
+        else preview = html1 + html2;
+        arr[i].preview = preview;
+      });
     },
     async toEdit(id) {
       this.$router.push('/edit');
       this.$Spin.show();
-      const res = await this.$store.commit('getBlogId', id);
+      const res = await this.$store.commit('setEditBlogId', id);
       this.$store.commit('toggleEdit', true);
       this.$Spin.hide();
+    },
+    async toViewBlog(id) {
+      this.$router.push(`/archive/${id}`);
     },
     async del(id) {
       this.$Spin.show();
@@ -58,6 +88,9 @@ export default {
       const res = await this.$axios.get('/blog');
       this.data = res.data.reverse();
       this.$Spin.hide();
+    },
+    getBlogTime(tiem) {
+      return new Date(tiem).toLocaleString();
     },
   },
   computed: {
@@ -74,9 +107,35 @@ export default {
 <style lang="scss" scoped>
 ::v-deep img {
   max-width: 100% !important;
+  min-width: 30% !important;
 }
 .ivu-icon {
   font-size: 25px;
   color: #444444 !important;
+}
+.ivu-list-item {
+  word-break: break-all !important;
+}
+::v-deep .ivu-list-item-extra {
+  max-width: 40% !important;
+  display: flex;
+  align-items: center;
+}
+::v-deep .ivu-list-item-main {
+  & > div:nth-of-type(2) {
+    max-height: 200px;
+    overflow: hidden;
+  }
+  p {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
+}
+@media screen and (max-width: 576px) {
+  ::v-deep .ivu-list-item-extra {
+    max-width: 100% !important;
+  }
 }
 </style>
