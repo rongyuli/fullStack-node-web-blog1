@@ -21,6 +21,10 @@ const Blog = sequelize.define('Blog', {
     type: 'VARCHAR(100)',
     defaultValue: '布尔什维克',
   },
+  type: {
+    type: 'VARCHAR(100)',
+    defaultValue: 'history',
+  },
 });
 const carousel = sequelize.define(
   'carousel',

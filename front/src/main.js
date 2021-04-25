@@ -21,6 +21,7 @@ router.afterEach((to) => {
     case 'back':
     case 'edit':
     case 'archive':
+    case 'theArchive':
       break;
     default:
       location.hash = '#/home';

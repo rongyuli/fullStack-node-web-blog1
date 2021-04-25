@@ -21,11 +21,6 @@ export default {
     Blog,
     Carousel,
   },
-  methods: {
-    toggleEditMode() {
-      this.showAdd = val;
-    },
-  },
   computed: {
     edit: {
       get() {

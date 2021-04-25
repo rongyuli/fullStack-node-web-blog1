@@ -48,7 +48,6 @@ export default {
         content: html,
       });
       this.$Spin.hide();
-      this.$store.commit('route', 1);
       this.$router.push('/');
     },
     async put() {
@@ -56,7 +55,8 @@ export default {
       if (this.editHeading === '') return this.$Message.info('标题不能为空！');
       if (html === '<p><br></p>') return this.$Message.info('内容不能为空！');
       this.$Spin.show();
-      await this.$axios.put(`/blog/${this.id}`, {
+      const id = location.hash.split('/')[3];
+      await this.$axios.put(`/blog/${id}`, {
         heading: this.editHeading,
         content: html,
       });
@@ -65,7 +65,8 @@ export default {
     },
     async get() {
       this.$Spin.show();
-      const { data } = await this.$axios.get(`/blog/${this.id}`);
+      const id = location.hash.split('/')[3];
+      const { data } = await this.$axios.get(`/blog/${id}`);
       this.$Spin.hide();
       const heading = data[0].heading;
       const content = data[0].content;
@@ -76,9 +77,6 @@ export default {
   computed: {
     editQuill() {
       return this.$refs.editQuill.quill;
-    },
-    id() {
-      return this.$store.state.editBlogId;
     },
   },
   created() {

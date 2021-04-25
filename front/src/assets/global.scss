@@ -36,9 +36,7 @@ p {
 .ivu-list-item-meta-description {
   text-align: right;
 }
-.ivu-list-item {
-  margin: 20px 0 !important;
-}
+
 .ivu-input {
   border: 1px solid #cccccc !important;
   border-radius: 0px !important;
@@ -110,4 +108,17 @@ p {
   i::before {
     color: #2db7f5 !important;
   }
+}
+
+.ivu-breadcrumb {
+  * {
+    color: #df280f !important;
+    font-size: 16px !important;
+  }
+}
+
+.ivu-list-item-action {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

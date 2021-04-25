@@ -52,16 +52,12 @@ export default {
         content: html,
       });
       this.$Spin.hide();
-      this.$store.commit('route', 1);
       this.$router.push('/');
     },
   },
   computed: {
     quill() {
       return this.$refs.editor.quill;
-    },
-    edit() {
-      return this.$store.state.edit;
     },
   },
 };

@@ -26,6 +26,7 @@
           <i :class="['iconfont', nowIcon]"></i>
           <span>{{ nowTitle }}</span>
         </div>
+        <Icon @click="back" id="back" type="md-arrow-back" />
         <Icon @click="toggle" id="button" class="yellow" type="md-menu" />
       </div>
       <div id="smallNavBox" :style="{ height: openNav ? '175px' : '0px' }">
@@ -84,6 +85,9 @@ export default {
           break;
       }
     },
+    back() {
+      this.$router.go(-1);
+    },
     toHome() {
       this.openNav = false;
       this.nowTitle = '首页';
@@ -113,7 +117,6 @@ export default {
       const hash = route.path.split('/')[1];
       switch (hash) {
         case 'home':
-          this.$store.commit('toggleEdit', false);
           this.toHome();
           this.nav = 1;
           break;
@@ -223,6 +226,14 @@ export default {
   font-size: 40px;
   top: 10px;
   right: 15px;
+  cursor: pointer;
+}
+#back {
+  color: #ffdf00;
+  position: absolute;
+  font-size: 40px;
+  top: 10px;
+  left: 15px;
   cursor: pointer;
 }
 </style>

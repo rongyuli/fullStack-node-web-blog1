@@ -5,23 +5,9 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    showEditBlog: false,
-    edit: false,
     editMode: false,
-    editBlogId: '',
   },
   mutations: {
-    setEditBlogId(state, id) {
-      state.editBlogId = id;
-      state.nav = 2;
-      state.edit = true;
-    },
-    toggleEdit(state, bool) {
-      state.edit = bool;
-    },
-    toggleEditBlog(state, bool) {
-      state.showEditBlog = bool;
-    },
     toggleEditMode(state, bool) {
       state.editMode = bool;
     },

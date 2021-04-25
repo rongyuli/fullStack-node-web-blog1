@@ -31,6 +31,9 @@
               <Icon @click="del(item.id)" type="ios-trash" />
               <span @click="del(item.id)">删除</span>
             </li>
+            <li>
+              <MySelect :id="item.id"></MySelect>
+            </li>
           </template>
           <template #extra>
             <div style="cursor: pointer;" @click="toViewBlog(item.id)" v-html="item.firstImg"></div>
@@ -44,10 +47,15 @@
 </template>
 
 <script>
+import MySelect from './select';
 export default {
+  components: {
+    MySelect,
+  },
   data() {
     return {
       data: [],
+      archive: '',
     };
   },
   methods: {
@@ -57,12 +65,12 @@ export default {
       this.$Spin.hide();
       this.data = res.data.reverse();
       const getFilstImg = /<img.*?>/;
-      const delImg = /<img.*?>/g;
-      const devide = /(<h1>|<h2>|<p>)[^<]*(<\/h1>|<\/h2>|<\/p>)/g;
+      const replace = /<img.*?>/g;
+      const devide = /(<h1>|<h2>|<p>).*?(<\/h1>|<\/h2>|<\/p>)/g;
       this.data.forEach((item, i, arr) => {
         const first = item.content.match(getFilstImg);
         arr[i].firstImg = first ? first[0] : null;
-        let preview = item.content.replace(delImg, '');
+        let preview = item.content.replace(replace, '[图片]');
         preview = preview.match(devide);
         const html1 = preview[0] || '';
         const html2 = preview[1] || '';
@@ -73,14 +81,14 @@ export default {
       });
     },
     async toEdit(id) {
-      this.$router.push('/edit');
-      this.$Spin.show();
-      const res = await this.$store.commit('setEditBlogId', id);
-      this.$store.commit('toggleEdit', true);
+      await this.$Spin.show();
+      await this.$router.push(`/edit/edit/${id}`);
       this.$Spin.hide();
     },
     async toViewBlog(id) {
-      this.$router.push(`/archive/${id}`);
+      const { data } = await this.$axios.get(`/blog/${id}`);
+      const archive = data[0].type;
+      this.$router.push(`/archive/${archive}/${id}`);
     },
     async del(id) {
       this.$Spin.show();
@@ -89,8 +97,8 @@ export default {
       this.data = res.data.reverse();
       this.$Spin.hide();
     },
-    getBlogTime(tiem) {
-      return new Date(tiem).toLocaleString();
+    getBlogTime(item) {
+      return new Date(item).toLocaleString();
     },
   },
   computed: {
@@ -108,6 +116,9 @@ export default {
 ::v-deep img {
   max-width: 100% !important;
   min-width: 30% !important;
+}
+.ivu-list-item {
+  margin: 20px 0 !important;
 }
 .ivu-icon {
   font-size: 25px;

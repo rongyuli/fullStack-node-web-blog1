@@ -1,5 +1,6 @@
 const { Blog } = require('../model/global');
 const blogMethods = require('../model/blog');
+const { putType } = require('../model/blog');
 Object.assign(Blog, blogMethods);
 
 module.exports = {
@@ -25,5 +26,15 @@ module.exports = {
   },
   async selectAll(ctx) {
     ctx.body = await Blog.selectAll();
+  },
+  async getType(ctx) {
+    const type = ctx.params.type;
+    ctx.body = await Blog.getType(type);
+  },
+  async putType(ctx) {
+    const id = ctx.params.id;
+    const type = ctx.params.type;
+    console.log(id, type);
+    ctx.body = await Blog.putType(id, type);
   },
 };

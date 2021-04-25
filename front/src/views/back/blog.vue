@@ -70,7 +70,6 @@ export default {
         content: html,
       });
       this.$Spin.hide();
-      this.$store.commit('route', 1);
       this.$router.push('/');
     },
     async put() {
@@ -101,12 +100,6 @@ export default {
     },
     editQuill() {
       return this.$refs.editQuill.quill;
-    },
-    id() {
-      return this.$store.state.editBlogId;
-    },
-    edit() {
-      return this.$store.state.edit;
     },
   },
   created() {
