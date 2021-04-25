@@ -62,7 +62,6 @@ export default {
     async getBlog() {
       this.$Spin.show();
       const res = await this.$axios.get('/blog');
-      this.$Spin.hide();
       this.data = res.data.reverse();
       const getFilstImg = /<img.*?>/;
       const replace = /<img.*?>/g;
@@ -79,16 +78,19 @@ export default {
         else preview = html1 + html2;
         arr[i].preview = preview;
       });
+      this.$Spin.hide();
     },
     async toEdit(id) {
-      await this.$Spin.show();
+      this.$Spin.show();
       await this.$router.push(`/edit/edit/${id}`);
       this.$Spin.hide();
     },
     async toViewBlog(id) {
+      this.$Spin.show();
       const { data } = await this.$axios.get(`/blog/${id}`);
       const archive = data[0].type;
       this.$router.push(`/archive/${archive}/${id}`);
+      this.$Spin.hide();
     },
     async del(id) {
       this.$Spin.show();

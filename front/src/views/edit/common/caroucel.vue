@@ -60,17 +60,17 @@ export default {
       this.toPostcarouselId = id;
     },
     async post(e) {
-      await this.$Spin.show();
+      this.$Spin.show();
       const fd = new FormData();
       fd.append('img', e.target.files[0]);
       await this.$axios.post('/carousel', fd);
-      await this.$Spin.hide();
+      this.$Spin.hide();
       this.getcarousel();
     },
     async del(id) {
-      await this.$Spin.show();
+      this.$Spin.show();
       await this.$axios.delete(`/carousel/${id}`);
-      await this.$Spin.hide();
+      this.$Spin.hide();
       this.getcarousel();
     },
     toPut(id) {
@@ -86,16 +86,16 @@ export default {
       this.getcarousel();
     },
     async putCover(id, cover) {
-      await this.$Spin.show();
+      this.$Spin.show();
       const bool = cover ? 1 : 0;
       await this.$axios.put(`/carousel/${id}/${bool}`);
-      await this.$Spin.hide();
+      this.$Spin.hide();
     },
     async getcarousel() {
-      await this.$Spin.show();
-      let { data } = await this.$axios.get('/carousel');
+      this.$Spin.show();
+      const { data } = await this.$axios.get('/carousel');
       this.carousel = data;
-      await this.$Spin.hide();
+      this.$Spin.hide();
     },
     getImg(file) {
       const fd = new FormData();

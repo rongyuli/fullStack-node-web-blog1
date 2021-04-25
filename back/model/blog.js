@@ -60,6 +60,5 @@ module.exports = {
       }
     );
     return res;
-    console.log(res);
   },
 };
