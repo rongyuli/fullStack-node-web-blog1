@@ -42,17 +42,17 @@ export default {
   },
   methods: {
     async post() {
+      this.$Spin.show();
       const html = this.quill.root.innerHTML;
       if (this.heading === '') return this.$Message.info('标题不能为空！');
       if (html === '<p><br></p>') return this.$Message.info('内容不能为空！');
-      await this.$Spin.show();
       await this.$axios.post('/blog', {
         heading: this.heading,
         author: this.author || '布尔什维克',
         content: html,
       });
-      await this.$Spin.hide();
-      this.$router.push('/');
+      this.$router.push('/home');
+      this.$Spin.hide();
     },
   },
   computed: {
