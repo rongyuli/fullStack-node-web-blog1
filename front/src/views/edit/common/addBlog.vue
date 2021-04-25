@@ -45,13 +45,13 @@ export default {
       const html = this.quill.root.innerHTML;
       if (this.heading === '') return this.$Message.info('标题不能为空！');
       if (html === '<p><br></p>') return this.$Message.info('内容不能为空！');
-      this.$Spin.show();
+      await this.$Spin.show();
       await this.$axios.post('/blog', {
         heading: this.heading,
         author: this.author || '布尔什维克',
         content: html,
       });
-      this.$Spin.hide();
+      await this.$Spin.hide();
       this.$router.push('/');
     },
   },

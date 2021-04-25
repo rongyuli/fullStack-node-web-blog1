@@ -9,16 +9,7 @@
     <Divider />
     <h1 h1>编辑轮播图</h1>
     <Row type="flex" justify="start" align="middle">
-      <Col
-        v-for="(item, index) in carousel"
-        class="carousel"
-        :xs="24"
-        :sm="24"
-        :md="12"
-        :lg="12"
-        :xl="8"
-        :key="index"
-      >
+      <Col v-for="(item, index) in carousel" class="carousel" :xs="24" :sm="24" :md="12" :lg="12" :xl="8" :key="index">
         <Row type="flex" justify="space-around" align="middle">
           <Col push="1" class="num">{{ index + 1 }}</Col>
           <Col>
@@ -69,13 +60,17 @@ export default {
       this.toPostcarouselId = id;
     },
     async post(e) {
+      await this.$Spin.show();
       const fd = new FormData();
       fd.append('img', e.target.files[0]);
       await this.$axios.post('/carousel', fd);
+      await this.$Spin.hide();
       this.getcarousel();
     },
     async del(id) {
+      await this.$Spin.show();
       await this.$axios.delete(`/carousel/${id}`);
+      await this.$Spin.hide();
       this.getcarousel();
     },
     toPut(id) {
@@ -83,18 +78,24 @@ export default {
       this.toPutcarouselId = id;
     },
     async put(e) {
+      await this.$Spin.show();
       const fd = new FormData();
       fd.append('img', e.target.files[0]);
       await this.$axios.put(`/carousel/${this.toPutcarouselId}`, fd);
+      await this.$Spin.hide();
       this.getcarousel();
     },
     async putCover(id, cover) {
+      await this.$Spin.show();
       const bool = cover ? 1 : 0;
-      this.$axios.put(`/carousel/${id}/${bool}`);
+      await this.$axios.put(`/carousel/${id}/${bool}`);
+      await this.$Spin.hide();
     },
     async getcarousel() {
+      await this.$Spin.show();
       let { data } = await this.$axios.get('/carousel');
       this.carousel = data;
+      await this.$Spin.hide();
     },
     getImg(file) {
       const fd = new FormData();
