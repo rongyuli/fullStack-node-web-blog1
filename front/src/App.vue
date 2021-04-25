@@ -3,13 +3,16 @@
     <Nav></Nav>
     <BackTop></BackTop>
     <router-view></router-view>
+    <Bottom></Bottom>
   </div>
 </template>
 <script>
 import Nav from './views/nav';
+import Bottom from './views/bottom';
 export default {
   components: {
     Nav,
+    Bottom,
   },
 };
 </script>
