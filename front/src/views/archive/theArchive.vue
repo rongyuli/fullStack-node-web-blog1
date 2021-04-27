@@ -119,7 +119,7 @@ export default {
   },
   computed: {
     editMode() {
-      return this.$store.state.editMode;
+      return sessionStorage.edit === 'true';
     },
   },
   created() {

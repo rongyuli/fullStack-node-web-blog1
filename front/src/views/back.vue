@@ -24,10 +24,11 @@ export default {
   computed: {
     edit: {
       get() {
-        return this.$store.state.editMode;
+        const bool = sessionStorage.edit === 'true';
+        return bool || false;
       },
       set(val) {
-        this.$store.commit('toggleEditMode', val);
+        sessionStorage.edit = val;
       },
     },
   },
