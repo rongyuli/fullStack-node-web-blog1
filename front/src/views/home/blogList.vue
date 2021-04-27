@@ -83,21 +83,17 @@ export default {
     async toEdit(id) {
       this.$Spin.show();
       await this.$router.push(`/edit/edit/${id}`);
-      this.$Spin.hide();
     },
     async toViewBlog(id) {
       this.$Spin.show();
       const { data } = await this.$axios.get(`/blog/${id}`);
       const archive = data[0].type;
       this.$router.push(`/archive/${archive}/${id}`);
-      this.$Spin.hide();
     },
     async del(id) {
       this.$Spin.show();
       await this.$axios.delete(`/blog/${id}`);
-      const res = await this.$axios.get('/blog');
-      this.data = res.data.reverse();
-      this.$Spin.hide();
+      this.getBlog();
     },
     getBlogTime(item) {
       return new Date(item).toLocaleString();

@@ -52,7 +52,6 @@ export default {
         content: html,
       });
       this.$router.push('/home');
-      this.$Spin.hide();
     },
   },
   computed: {

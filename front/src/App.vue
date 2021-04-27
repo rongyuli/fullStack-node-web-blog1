@@ -3,7 +3,6 @@
     <Nav></Nav>
     <BackTop></BackTop>
     <router-view></router-view>
-    <Bottom></Bottom>
   </div>
 </template>
 <script>
