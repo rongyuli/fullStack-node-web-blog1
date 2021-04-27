@@ -6,7 +6,6 @@ Object.assign(Blog, blogMethods);
 module.exports = {
   async post(ctx) {
     let { heading, author, content } = ctx.request.body;
-    console.log(heading, author, content);
     await Blog.post(heading, author, content);
     ctx.body = 'success';
   },
@@ -34,7 +33,6 @@ module.exports = {
   async putType(ctx) {
     const id = ctx.params.id;
     const type = ctx.params.type;
-    console.log(id, type);
     ctx.body = await Blog.putType(id, type);
   },
 };

@@ -14,6 +14,6 @@ p {
   text-align: center;
 }
 div {
-  padding-bottom: 13px;
+  padding: 13px 0;
 }
 </style>

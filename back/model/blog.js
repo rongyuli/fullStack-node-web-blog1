@@ -48,7 +48,6 @@ module.exports = {
     });
   },
   async putType(id, type) {
-    console.log(11);
     const res = await this.update(
       {
         type: type,

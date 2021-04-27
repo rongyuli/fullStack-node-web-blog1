@@ -11,7 +11,6 @@ module.exports = {
   },
   async delete(ctx) {
     let { img } = await carousel.delete(ctx.params.id);
-    console.log(img);
     ctx.body = true;
   },
   async put(ctx) {
