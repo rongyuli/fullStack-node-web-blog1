@@ -23,7 +23,8 @@ export default {
     },
   },
   watch: {
-    async type(type) {
+    async type(type, old) {
+      if (!old) return;
       await this.$Spin.show();
       await this.$axios.put(`/blog/${type}/${this.id}`);
       this.$Spin.hide();
