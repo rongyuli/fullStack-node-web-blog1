@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import MySelect from './select';
+import MySelect from '../home/select';
 export default {
   components: {
     MySelect,
@@ -67,7 +67,6 @@ export default {
       const type = location.hash.split('/')[2];
       const res = await this.$axios.get(`/blog/type/${type}`);
       if (res.data.length === 0) this.nodata = true;
-      this.$Spin.hide();
       this.data = res.data.reverse();
       const getFilstImg = /<img.*?>/;
       const replace = /<img.*?>/g;
@@ -84,6 +83,7 @@ export default {
         else preview = html1 + html2;
         arr[i].preview = preview;
       });
+      this.$Spin.hide();
     },
     async toEdit(id) {
       this.$Spin.show();
@@ -97,9 +97,7 @@ export default {
     async del(id) {
       this.$Spin.show();
       await this.$axios.delete(`/blog/${id}`);
-      const res = await this.$axios.get('/blog');
-      this.data = res.data.reverse();
-      this.$Spin.hide();
+      this.getTypeBlog();
     },
     getBlogTime(tiem) {
       return new Date(tiem).toLocaleString();
