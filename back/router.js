@@ -10,8 +10,9 @@ module.exports = router
   .put('/blog/:id', blog.put)
   .put('/blog/:type/:id', blog.putType)
   .get('/blog', blog.selectAll)
-  .get('/blog/:id', blog.select)
+  .get('/blog/some/:num', blog.getSomeBlogs)
   .get('/blog/type/:type', blog.getType)
+  .get('/blog/:id', blog.select)
 
   .post('/carousel', carousel.add)
   .delete('/carousel/:id', carousel.delete)

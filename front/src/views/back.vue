@@ -24,8 +24,7 @@ export default {
   computed: {
     edit: {
       get() {
-        const bool = sessionStorage.edit === 'true';
-        return bool || false;
+        return sessionStorage.edit === 'true';
       },
       set(val) {
         sessionStorage.edit = val;

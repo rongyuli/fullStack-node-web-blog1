@@ -134,4 +134,36 @@ export default {
   max-width: 100% !important;
   min-width: 30% !important;
 }
+.ivu-list-item {
+  margin: 20px 0 !important;
+}
+.ivu-icon {
+  font-size: 25px;
+  color: #444444 !important;
+}
+.ivu-list-item {
+  word-break: break-all !important;
+}
+::v-deep .ivu-list-item-extra {
+  max-width: 40% !important;
+  display: flex;
+  align-items: center;
+}
+::v-deep .ivu-list-item-main {
+  & > div:nth-of-type(2) {
+    max-height: 200px;
+    overflow: hidden;
+  }
+  p {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
+}
+@media screen and (max-width: 576px) {
+  ::v-deep .ivu-list-item-extra {
+    max-width: 100% !important;
+  }
+}
 </style>

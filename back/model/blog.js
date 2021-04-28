@@ -47,6 +47,12 @@ module.exports = {
       },
     });
   },
+  async getSomeBlogs(num) {
+    let res = await this.findAll();
+    res.reverse();
+    res = res.slice(num, num + 2);
+    return res || '已加载全部博文';
+  },
   async putType(id, type) {
     const res = await this.update(
       {
