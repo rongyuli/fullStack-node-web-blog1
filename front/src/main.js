@@ -7,7 +7,7 @@ import ViewUI from 'view-design';
 
 Vue.config.productionTip = false;
 Vue.prototype.$axios = axios;
-axios.defaults.baseURL = 'http://127.0.0.1:3000';
+axios.defaults.baseURL = 'http://123.56.120.173:90';
 
 import 'view-design/dist/styles/iview.css';
 import 'quill/dist/quill.core.css';

@@ -2,6 +2,7 @@ const koa = require('koa');
 const cors = require('koa2-cors');
 const koaBody = require('koa-body');
 const bodyParser = require('koa-bodyparser');
+const serve = require('koa-static');
 
 const router = require('./router');
 
@@ -18,7 +19,8 @@ app.use(
 );
 app.use(bodyParser());
 app.use(router.routes());
+app.use(serve('./dist'))
 
-app.listen(3000, () => {
+app.listen(90, () => {
   console.log('running...');
 });

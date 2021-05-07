@@ -27,7 +27,7 @@
               <Col>
                 <div
                   @click="toPut(item.id)"
-                  :style="{ backgroundImage: `url(http://127.0.0.1:91${item.img})` }"
+                  :style="{ backgroundImage: `url(http://123.56.120.173:91${item.img})` }"
                   class="img"
                 ></div>
               </Col>

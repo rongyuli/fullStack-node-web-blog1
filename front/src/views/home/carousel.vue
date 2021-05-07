@@ -5,7 +5,7 @@
         <div
           class="img"
           :style="{
-            backgroundImage: `url(http://127.0.0.1:91${item.img})`,
+            backgroundImage: `url(http://123.56.120.173:91${item.img})`,
             backgroundSize: carousel[index].cover ? 'auto' : 'cover',
           }"
         ></div>
