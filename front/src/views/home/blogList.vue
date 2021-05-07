@@ -97,6 +97,21 @@ export default {
       await this.$axios.delete(`/blog/${id}`);
       const res = await this.$axios.get('/blog');
       this.data = res.data.reverse();
+      const getFilstImg = /<img.*?>/;
+      const replace = /<img.*?>/g;
+      const devide = /(<h1>|<h2>|<p>).*?(<\/h1>|<\/h2>|<\/p>)/g;
+      this.data.forEach((item, i, arr) => {
+        const first = item.content.match(getFilstImg);
+        arr[i].firstImg = first ? first[0] : null;
+        let preview = item.content.replace(replace, '[图片]');
+        preview = preview.match(devide);
+        const html1 = preview[0] || '';
+        const html2 = preview[1] || '';
+        const html3 = '<p>. . .</p>';
+        if (preview[2]) preview = html1 + html2 + html3;
+        else preview = html1 + html2;
+        arr[i].preview = preview;
+      });
       this.$Spin.hide();
     },
     getBlogTime(item) {
